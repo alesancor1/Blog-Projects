@@ -1,0 +1,32 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: simple-db
+  name: simple-db
+  namespace: simple-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: simple-db
+  template:
+    metadata:
+      labels:
+        app: simple-db
+    spec:
+      containers:
+        - image: mongo
+          imagePullPolicy: Always
+          name: simple-db
+          ports:
+            - containerPort: 27017
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /data/db
+              name: volume-simple-db-data
+      volumes:
+        - name: volume-simple-db-data
+          persistentVolumeClaim:
+            claimName: simple-db

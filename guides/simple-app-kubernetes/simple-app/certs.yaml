@@ -1,0 +1,12 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: simple-app-certs
+  namespace: simple-app
+spec:
+  dnsNames:
+    - simple-app.example.com
+  issuerRef:
+    name: simple-app-letsencrypt
+    kind: Issuer
+  secretName: simple-app-certs

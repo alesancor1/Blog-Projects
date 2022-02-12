@@ -1,0 +1,12 @@
+apiVersion: v2
+name: simple-app
+description: Helm Chart for Simple App
+type: application
+version: 0.1.0
+appVersion: "latest"
+
+dependencies:
+  - name: mongodb
+    version: "*"
+    repository: "https://charts.bitnami.com/bitnami"
+    alias: simple-db

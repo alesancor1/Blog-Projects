@@ -1,0 +1,16 @@
+# App Configs
+node_env: development
+db_host: simple-db
+db_port: 27017
+db_name: simple-db
+port: 3300
+
+# DB Configs
+simple-db:
+  fullnameOverride: simple-db
+  nameOverride: simple-db
+  auth:
+    enabled: false
+
+global:
+  namespaceOverride: simple-app

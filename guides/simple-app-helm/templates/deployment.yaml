@@ -1,0 +1,40 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: {{ .Chart.Name }}
+  name: {{ .Chart.Name }}
+  namespace: simple-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Chart.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Chart.Name }}
+    spec:
+      containers:
+        - env:
+          - name: PORT
+            value: "{{ .Values.port }}"
+          - name: DB_HOST
+            value: {{ .Values.db_host }}
+          - name: DB_PORT
+            value: "{{ .Values.db_port }}"
+          - name: DB_NAME
+            value: {{ .Values.db_name }}
+
+          image: alesancor1/simple-app:{{ .Chart.AppVersion }}
+          imagePullPolicy: Always
+          name: {{ .Chart.Name }}
+          ports:
+            - containerPort: {{ .Values.port }}
+              protocol: TCP
+          resources:
+            requests:
+              memory: 300Mi
+            limits:
+              memory: 500Mi

@@ -1,0 +1,17 @@
+version: '3.1'
+services: 
+  simple-app:
+    container_name: simple-app
+    image: alesancor1/simple-app
+    restart: 'unless-stopped'
+    environment:
+      - PORT=32000
+      - DB_HOST=simple-db
+      - DB_PORT=27017
+      - DB_NAME=simple-db
+    ports:
+      - '32000:32000'
+  simple-db:
+    container_name: simple-db
+    image: mongo
+    restart: 'unless-stopped'

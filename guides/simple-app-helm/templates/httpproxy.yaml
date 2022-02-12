@@ -1,0 +1,18 @@
+{{- if eq .Values.node_env "production" }}
+apiVersion: projectcontour.io/v1
+kind: HTTPProxy
+metadata:
+  name: {{ .Chart.Name }}-httpproxy
+  namespace: simple-app
+spec:
+  virtualhost:
+    fqdn: {{ .Values.domain }}
+    tls:
+      secretName: {{ .Chart.Name }}-certs
+  routes:
+  - services:
+    - name: {{ .Chart.Name }}
+      port: {{ .Values.port }}
+    loadBalancerPolicy:
+      strategy: Cookie
+{{- end}}
